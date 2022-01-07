@@ -24,6 +24,11 @@ module.exports.createCustomer = async (req, res, next) => {
   var {error} = await schema.validate(req.body);
   if (error) return res.status(400).send({msg : error.details[0].message});
 
+  var existUser = await mongo.db
+    .collection("customerDetails")
+    .findOne({ mail: req.body.mail });
+  if (existUser) return res.status(400).send({ msg: "Email already exists" });
+
     const salt = await bcrypt.genSalt(10);
     req.body.password = await bcrypt.hash(req.body.password, salt);
   try {
