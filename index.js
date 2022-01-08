@@ -1,7 +1,7 @@
 
 const express = require("express");
 const app = express();
-const mongo = require("./connect");
+const mongo = require("./shared/connect");
 const roomDetailsRouter = require("./routes/roomDetails");
 const customerDetailsRouter = require("./routes/customerDetails");
 const cors = require("cors");
